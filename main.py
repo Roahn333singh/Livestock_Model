@@ -64,6 +64,11 @@ def model_prediction_Livestk(test_image):
 # UI MAKING
 
 def main():
+    cure_suggestions = {
+    "cow_healthy": "No action needed. The cow is healthy.",
+    "cow_lumpy": "Consult a veterinarian. Lumpy skin disease needs immediate attention and vaccine intervention.",
+    "cow_rinderpest": "Isolate the infected animal immediately and notify local animal health authorities. Vaccination is necessary."
+    }
     # Use HyLoader to display a loader before the main content of the page loads
     with hc.HyLoader('Now doing loading',hc.Loaders.standard_loaders,index=[3,0,5]):
         time.sleep(3)
@@ -114,7 +119,6 @@ def main():
         set_background("#000000")  # Set a dark background
         
         st.sidebar.title("Livestock Disease Prediction")
-        
         st.sidebar.subheader("Upload Image")
         test_image = st.sidebar.file_uploader("Choose an Image (png, jpg, jpeg):", type=['png', 'jpg', 'jpeg'])
         
@@ -125,30 +129,27 @@ def main():
             # Scrolling text if no image is uploaded
             content_placeholder.markdown(
                 """
-            <style>
-            @keyframes scroll {
-                0% { transform: translateX(100%); }
-                100% { transform: translateX(-100%); }
-            }
-            .css-2trqyj {{
-                color: #000000;  /* Change color to your preference */
-            }}
-            div.scrolling-text {
-                width: 100%;
-                white-space: nowrap;
-                overflow: hidden;
-                box-sizing: border-box;
-                animation: scroll 10s linear infinite;
-                margin-top: 200px;
-            }
-            div.scrolling-text > h1 {
-                color: #4CAF50;  /* Updated color with more specificity */
-                font-size: 20px;
-            }
-            </style>
-            <div class="scrolling-text">
-                <h1 style="color: #4CAF50;">Upload image...</h1>  <!-- Inline style for maximum priority -->
-            </div>
+                <style>
+                @keyframes scroll {
+                    0% { transform: translateX(100%); }
+                    100% { transform: translateX(-100%); }
+                }
+                div.scrolling-text {
+                    width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    box-sizing: border-box;
+                    animation: scroll 10s linear infinite;
+                    margin-top: 200px;
+                }
+                div.scrolling-text > h1 {
+                    color: #4CAF50;  # Updated color with more specificity
+                    font-size: 20px;
+                }
+                </style>
+                <div class="scrolling-text">
+                    <h1 style="color: #4CAF50;">Upload image...</h1>
+                </div>
                 """,
                 unsafe_allow_html=True
             )
@@ -157,18 +158,18 @@ def main():
             content_placeholder.image(test_image, caption="Uploaded Image", use_column_width=True)
             
             if st.button("Predict"):
-                st.snow()  # Add a fun snow effect
+                st.balloons() # Add a fun snow effect
                 st.write("🔍 **Analyzing Image...**")
                 
-                result_index, confidence = model_prediction_Livestk(test_image)  # Get both index and confidence
-                
-                # Define class names (adjust as per your actual classes)
+                result_index, confidence = model_prediction_Livestk(test_image)
                 class_names = ["cow_healthy", "cow_lumpy", "cow_rinderpest"]
                 predicted_class = class_names[result_index]
+                cure_tip = cure_suggestions[predicted_class]
                 
-                # Display the result with confidence
+                # Display the result with confidence and cure suggestion
                 st.subheader(f"Prediction: {predicted_class}")
-                st.success(f"Model is predicting it's a {predicted_class} with {confidence * 100:.2f}% confidence")  # Display confidence as percentage
+                st.success(f"Model is predicting it's a {predicted_class} with {confidence * 100:.2f}% confidence")
+                st.info(f"Suggested Action: {cure_tip}")
                 
                 # Confidence slider to adjust based on prediction confidence
                 confidence_threshold = st.slider("Confidence Threshold", 0, 100, int(confidence * 100))
@@ -303,7 +304,7 @@ def main():
             
             # Predict button
             if st.button("Predict"):
-                st.spinner()  # Fun effect
+                st.balloons()  # Fun effect
                 st.write("🔍 **Analyzing Image...**")
                 
                 # Call the model prediction function and handle the result
