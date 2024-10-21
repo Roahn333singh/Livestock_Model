@@ -3,3 +3,4 @@ tensorflow
 numpy
 streamlit_lottie
 scikit-fuzzy
+hydralit_components
