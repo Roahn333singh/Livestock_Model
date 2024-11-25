@@ -1,6 +1,6 @@
 
 
-
+streamlit-lottie
 pandas==2.2.3
 scikit-fuzzy
 hydralit_components
