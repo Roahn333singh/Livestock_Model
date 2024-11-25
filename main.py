@@ -6,6 +6,7 @@ import time
 import requests
 import json
 import hydralit_components as hc
+from numpy import isin
 
 # Tensorflow model prediction
 def set_background(color):
