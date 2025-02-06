@@ -47,7 +47,7 @@ def model_prediction_Livestk(test_image):
     model = tf.keras.models.load_model("Image_Net.h5")
     
     # Load and preprocess the image
-    image = tf.keras.preprocessing.image.load_img(test_image, target_size=(224, 224))
+    image = tf.keras.preprocessing.image.load_img(test_image, target_size=(128, 128))
     input_arr = tf.keras.preprocessing.image.img_to_array(image)
     input_arr = input_arr / 255.0  # Normalize the image
     
@@ -57,7 +57,7 @@ def model_prediction_Livestk(test_image):
     # Make predictions
     predictions = model.predict(input_arr)
     max_probability = np.max(predictions)  # Get the maximum probability
-    class_index = np.argmax(predictions)    # Get the class index of the highest probability
+    class_index = np.argmax(predictions[5:])   
     
     return class_index, max_probability  
 
@@ -84,8 +84,7 @@ def main():
         with open(filepath, "r") as f:
             return json.load(f)
 
-    # Load Lottie animation from the local file
-    lottie_animation = load_lottie_file("Animation - 1729446950990.json")  # Replace with your local Lottie JSON file path
+
 
     # def livestock_disease_ui():
     #     st.header("🐮 Live Stock Disease Recognition")
@@ -296,7 +295,7 @@ def main():
         st.header("🌱 Disease Recognition")
         
         # File uploader for the image
-        test_image = st.file_uploader("📂 Choose an Image (png, jpg, jpeg):", type=['png', 'jpg', 'jpeg'])
+        test_image = st.file_uploader("📂 Choose an Image (png, jpg, jpeg):", type=['png','jpeg'])
         
         if test_image is not None:
             # Display the image with a caption
