@@ -1,5 +1,5 @@
 # Livestock Disease Prediction using MobileNet
-
+note **-> the written .h5 as image_net is actually mobilenet
 ## Overview
 This project focuses on classifying cow health conditions using a **deep learning model based on MobileNet**. The model predicts three classes of cow conditions with high accuracy:
 
