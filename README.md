@@ -95,7 +95,7 @@ print(f"Test accuracy: {acc}")
 - 🌍 **Deploy the model using Flask or Streamlit** for easy accessibility.
 
 ## Contributors
-- 👤 **Your Name** - [GitHub Profile](https://github.com/yourusername)
+- 👤 **Your Name** - [GitHub Profile](https://github.com/Roahn333singh)
 
 ## License
 📜 This project is licensed under the MIT License.
