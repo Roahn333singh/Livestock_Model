@@ -100,9 +100,7 @@ print(f"Test accuracy: {acc}")
 ## License
 📜 This project is licensed under the MIT License.
 
----
-** This is how my model ui implementation looks like and i am further working to make it better .....
-<img width="713" alt="image" src="https://github.com/user-attachments/assets/337acfb2-2199-45e2-b72b-c466486eabb0" />
+
 
 Feel free to contribute by improving the dataset or model performance! 🚀
 
